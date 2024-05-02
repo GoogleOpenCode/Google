@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Search Engine</title>
+    <style>
+        /* Basic styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .search-form {
+            text-align: center;
+        }
+        .search-input {
+            width: 70%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            outline: none;
+        }
+        .search-button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .search-button:hover {
+            background-color: #45a049;
+        }
+        .search-results {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .search-results a {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Simple Search Engine</h1>
+        <form class="search-form" onsubmit="search(event)">
+            <input type="text" class="search-input" id="searchInput" placeholder="Search..." required>
+            <button type="submit" class="search-button">Search</button>
+        </form>
+        <div class="search-results" id="searchResults">
+            <!-- Search results will appear here -->
+        </div>
+    </div>
+
+    <script>
+        function search(event) {
+            event.preventDefault(); // Prevent form submission
+
+            // Get search query
+            var query = document.getElementById('searchInput').value.toLowerCase();
+
+            // Static list of links (replace with your own data)
+            var links = [
+                { title: 'Example Page 1', url: 'https://www.example.com/page1' },
+                { title: 'Example Page 2', url: 'https://www.example.com/page2' },
+                { title: 'Example Page 3', url: 'https://www.example.com/page3' }
+            ];
+
+            // Filter links based on search query
+            var filteredLinks = links.filter(function(link) {
+                return link.title.toLowerCase().includes(query);
+            });
+
+            // Display search results
+            var searchResultsContainer = document.getElementById('searchResults');
+            searchResultsContainer.innerHTML = ''; // Clear previous results
+
+            if (filteredLinks.length === 0) {
+                searchResultsContainer.innerHTML = '<p>No results found.</p>';
+            } else {
+                filteredLinks.forEach(function(link) {
+                    var linkElement = document.createElement('a');
+                    linkElement.href = link.url;
+                    linkElement.textContent = link.title;
+                    searchResultsContainer.appendChild(linkElement);
+                });
+            }
+        }
+    </script>
+</body>
+</html>
